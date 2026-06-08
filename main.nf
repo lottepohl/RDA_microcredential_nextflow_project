@@ -15,37 +15,43 @@
 // Fastp is an alternative of Trimmomatic for trimming FASTQ reads.
 
 // include modiles
-include { fastqc_proj} from "./modules/fastqc_proj" 
-include { multiqc_proj } from "./modules/multiqc_proj" 
+include { flash2} from "./modules/step1_flash2" 
+include { bwa } from "./modules/step2_bwa" 
 
 // define parameters
 params {
     data_path: String="${launchDir}/project/data1/*.fastq" // if file pattern: put String, not Path!
-    samples_desc_path: Path="${launchDir}/project/samplesheet_project.csv"
-    outdir: Path="${launchDir}/project/results"
+    samples_path: Path="/data/gent/courses/2025/vibrepdata_EXT003/shared/testdata_lotte_and_matilde"
+    outdir: Path="${launchDir}/results"
 }
 
 workflow {
     // make the data into an input channel for the fastqc
     def samples_ch = channel
-                     .fromPath(params.samples_desc_path)
-                     .splitCsv(header:true)
-                     .map{col -> tuple(col.sample, {'${launchDir}/project/col.fastq_1'}, {'${launchDir}/project/col.fastq_2'})}
-                     .view()
-    
-    // old
-    // def data1_ch = channel.fromPath(params.data_path)
-    //                .view()
-    
-    // execute the fastqc
-    fastqc_proj(samples_ch)
+    .of('sample1', 'sample2', 'sample3', 'control1')
+    .map { sample ->
+        tuple(
+            sample,
+            file("${params.sample_path}/${sample}_1.fq"),
+            file("${params.sample_path}/${sample}_2.fq")
+        )
+    }
+    .view()
 
-    //define the input for the multiqc and get it all in 1 list
-    input_multiqc = fastqc_proj.out.fastqc
-                    .collect()
-                    .view()
+    // execute flash2
+    flash2(samples_ch)
 
-    // execute the multiqc on the list of fastwc files
-    // multiqc_proj(input_multiqc)
+    // Stopped on 2026-06-08
+    
+    // // execute the fastqc
+    // fastqc_proj(samples_ch)
+
+    // //define the input for the multiqc and get it all in 1 list
+    // input_multiqc = fastqc_proj.out.fastqc
+    //                 .collect()
+    //                 .view()
+
+    // // execute the multiqc on the list of fastwc files
+    // // multiqc_proj(input_multiqc)
 }
 
