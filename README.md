@@ -19,6 +19,8 @@ The pipeline encompasses four main steps:
 
     The custom .py script is inside a container, which can be found here: (* insert link *).
 
+    The dockerhub images are put on the shared folder on the UGent hpc: /data/gent/courses/2025/vibrepdata_EXT003/shared/apptainer_cache
+
 ## Instructions how to run the pipeline 
 
 ### Test dataset
