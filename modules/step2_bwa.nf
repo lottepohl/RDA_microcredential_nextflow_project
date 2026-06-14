@@ -1,19 +1,24 @@
-// from the small project inside the nextflow course: just placeholder
-process bwa{
-    container 'quay.io/biocontainers/bwa:0.7.19--h577a1d6_1'
-    publishDir {"${params.outdir}/fastqc/fastqc-${sample}/"}, mode: 'copy', overwrite: true
+#!/usr/bin/env nextflow
 
-    tag "$sample" // show var during pipeline execution
+process bwa_process{
+    container 'quay.io/biocontainers/bwa:0.7.19--h577a1d6_1'
+    // container 'community.wave.seqera.io/library/bwa_htslib_samtools:83b50ff84ead50d0'
+    // container 'https://hub.docker.com/r/shinejh0528/bbmerge'
+    
+    publishDir "${params.outdir}/bwa/", mode: 'copy', overwrite: true
+    tag "$sample"
 
     input:
-    tuple val(sample), path(read1), path(read2)
+    tuple path(genes), path(borders)
+    tuple val(sample), path(merged_read)
 
     output:
-    path("*_bwa.{zip,html}"), emit: bwa
+    path("${sample}.sam"), emit: sam
 
     script:
     """
-    bwa ${sample}
+    bwa index $genes
+    bwa mem $genes $merged_read > ${sample}.sam
     """
 
 }
