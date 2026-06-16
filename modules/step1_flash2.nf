@@ -16,8 +16,9 @@ process flash2_process {
     tuple val(sample), path(read1), path(read2)
 
     output:
-    path("${sample}.extendedFrags.fastq"), emit: merged
-    path("${sample}.notCombined*.fastq")
+    tuple val(sample), path("${sample}.extendedFrags.fastq"), emit: merged
+    path("${sample}.histogram")
+    path("${sample}.hist")
 
     script:
     """
