@@ -1,0 +1,228 @@
+Jun-16 14:19:31.543 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf
+Jun-16 14:19:31.672 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 26.04.3
+Jun-16 14:19:31.693 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/user/gent/516/vsc51676/.nextflow/plugins; core-plugins: nf-amazon@3.9.1,nf-azure@1.22.5,nf-cloudcache@0.6.0,nf-codecommit@0.5.2,nf-console@1.3.0,nf-google@1.27.3,nf-k8s@1.5.4,nf-seqera@0.20.1,nf-tower@1.28.0,nf-wave@1.21.0
+Jun-16 14:19:31.714 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jun-16 14:19:31.715 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jun-16 14:19:31.718 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.14.1 in 'deployment' mode
+Jun-16 14:19:31.733 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+Jun-16 14:19:31.851 [main] DEBUG nextflow.plugin.PluginUpdater - Using plugin repository: HttpPluginRepository [registry]; url=https://registry.nextflow.io/api
+Jun-16 14:19:31.855 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jun-16 14:19:31.881 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /kyukon/home/gent/516/vsc51676/RDA_microcredential_nextflow_project/nextflow.config
+Jun-16 14:19:31.883 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /kyukon/home/gent/516/vsc51676/RDA_microcredential_nextflow_project/nextflow.config
+Jun-16 14:19:31.887 [main] DEBUG nextflow.config.ConfigParserFactory - Using config parser v2
+Jun-16 14:19:31.902 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Jun-16 14:19:32.245 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jun-16 14:19:32.245 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Jun-16 14:19:32.258 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /user/gent/516/vsc51676/.nextflow/secrets/store.json
+Jun-16 14:19:32.261 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@97d0c06] - activable => nextflow.secret.LocalSecretsProvider@97d0c06
+Jun-16 14:19:32.273 [main] DEBUG nextflow.cli.CmdRun - Launching `main.nf` [focused_wiles] - revision: cf94396f1e
+Jun-16 14:19:32.342 [main] DEBUG nextflow.Session - Session UUID: fb50a45c-8fac-4d32-8600-ef24070acc1b
+Jun-16 14:19:32.342 [main] DEBUG nextflow.Session - Run name: focused_wiles
+Jun-16 14:19:32.343 [main] DEBUG nextflow.Session - Executor pool size: 4
+Jun-16 14:19:32.351 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Jun-16 14:19:32.356 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Jun-16 14:19:32.373 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 26.04.3 build 12259
+  Created: 28-05-2026 08:48 UTC (10:48 CEST)
+  System: Linux 5.14.0-570.110.1.el9_6.x86_64
+  Runtime: Groovy 4.0.31 on OpenJDK 64-Bit Server VM 25+36-LTS
+  Encoding: UTF-8 (UTF-8)
+  Process: 1188516@node3505.doduo.os [10.141.5.5]
+  CPUs: 4 - Mem: 251.2 GB (230.4 GB) - Swap: 20 GB (19.8 GB)
+Jun-16 14:19:32.392 [main] DEBUG nextflow.Session - Work-dir: /kyukon/home/gent/516/vsc51676/RDA_microcredential_nextflow_project/work [gpfs]
+Jun-16 14:19:32.392 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /kyukon/home/gent/516/vsc51676/RDA_microcredential_nextflow_project/bin
+Jun-16 14:19:32.400 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jun-16 14:19:32.411 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Jun-16 14:19:32.413 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+Jun-16 14:19:32.448 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Jun-16 14:19:32.456 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+Jun-16 14:19:32.524 [main] DEBUG nextflow.Session - Session start
+Jun-16 14:19:32.532 [main] DEBUG nextflow.script.ScriptLoaderFactory - Using script parser v2
+Jun-16 14:19:32.937 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jun-16 14:19:32.974 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `outdir` -- Initialise it to a default value eg. `params.outdir = some_value`
+Jun-16 14:19:33.160 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jun-16 14:19:33.160 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jun-16 14:19:33.167 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Jun-16 14:19:33.173 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=251.2 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Jun-16 14:19:33.175 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Jun-16 14:19:33.206 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'flash2_process': maxForks=0; fair=false; array=0
+Jun-16 14:19:33.231 [main] DEBUG nextflow.Session - Process names: flash2_process, bwa_process
+Jun-16 14:19:33.233 [main] DEBUG nextflow.Session - Igniting dataflow network (2)
+Jun-16 14:19:33.237 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > flash2_process
+Jun-16 14:19:33.241 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  _nf_script_d442f8ad47695f44: /kyukon/home/gent/516/vsc51676/RDA_microcredential_nextflow_project/modules/step2_bwa.nf
+  _nf_script_7b02747aa740ac47: /kyukon/home/gent/516/vsc51676/RDA_microcredential_nextflow_project/modules/step1_flash2.nf
+  Main: /kyukon/home/gent/516/vsc51676/RDA_microcredential_nextflow_project/main.nf
+Jun-16 14:19:33.241 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Jun-16 14:19:33.241 [main] DEBUG nextflow.Session - Session await
+Jun-16 14:19:33.355 [Actor Thread 6] DEBUG nextflow.container.SingularityCache - Apptainer found local store for image=docker://flash2.sif; path=/scratch/gent/516/vsc51676/.apptainer_cache/flash2.sif
+Jun-16 14:19:33.468 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-16 14:19:33.470 [Task submitter] INFO  nextflow.Session - [f4/7a93d5] Submitted process > flash2_process (sample3)
+Jun-16 14:19:33.485 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-16 14:19:33.488 [Task submitter] INFO  nextflow.Session - [e3/af5f12] Submitted process > flash2_process (sample1)
+Jun-16 14:19:33.499 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-16 14:19:33.500 [Task submitter] INFO  nextflow.Session - [94/252b50] Submitted process > flash2_process (sample2)
+Jun-16 14:19:33.517 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-16 14:19:33.520 [Task submitter] INFO  nextflow.Session - [da/32ee40] Submitted process > flash2_process (sample4)
+Jun-16 14:20:05.580 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: flash2_process (sample1); status: COMPLETED; exit: 1; error: -; workDir: /kyukon/home/gent/516/vsc51676/RDA_microcredential_nextflow_project/work/e3/af5f12c464be2e86181a89b9aaad14]
+Jun-16 14:20:05.583 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Jun-16 14:20:05.595 [TaskFinalizer-1] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=flash2_process (sample1); work-dir=/kyukon/home/gent/516/vsc51676/RDA_microcredential_nextflow_project/work/e3/af5f12c464be2e86181a89b9aaad14
+  error [nextflow.exception.ProcessFailedException]: Process `flash2_process (sample1)` terminated with an error exit status (1)
+Jun-16 14:20:05.613 [TaskFinalizer-1] ERROR nextflow.processor.TaskProcessor - Error executing process > 'flash2_process (sample1)'
+
+Caused by:
+  Process `flash2_process (sample1)` terminated with an error exit status (1)
+
+
+Command executed:
+
+  flash2 sample1_1.fq.gz sample1_2.fq.gz -o sample1 -t 1
+  gzip sample1.extendedFrags.fastq sample1*.notCombined*.fastq
+
+Command exit status:
+  1
+
+Command output:
+  [FLASH] Processed 575000 read pairs
+  [FLASH] Processed 600000 read pairs
+  [FLASH] Processed 625000 read pairs
+  [FLASH] Processed 650000 read pairs
+  [FLASH] Processed 675000 read pairs
+  [FLASH] Processed 700000 read pairs
+  [FLASH] Processed 725000 read pairs
+  [FLASH] Processed 750000 read pairs
+  [FLASH] Processed 775000 read pairs
+  [FLASH] Processed 800000 read pairs
+  [FLASH] Processed 825000 read pairs
+  [FLASH] Processed 850000 read pairs
+  [FLASH] Processed 875000 read pairs
+  [FLASH] Processed 900000 read pairs
+  [FLASH] Processed 925000 read pairs
+  [FLASH] Processed 950000 read pairs
+  [FLASH] Processed 975000 read pairs
+  [FLASH] Processed 1000000 read pairs
+  [FLASH] Processed 1025000 read pairs
+  [FLASH] Processed 1050000 read pairs
+  [FLASH] Processed 1075000 read pairs
+  [FLASH] Processed 1100000 read pairs
+  [FLASH] Processed 1125000 read pairs
+  [FLASH] Processed 1150000 read pairs
+  [FLASH] Processed 1175000 read pairs
+  [FLASH] Processed 1200000 read pairs
+  [FLASH] Processed 1225000 read pairs
+  [FLASH] Processed 1250000 read pairs
+  [FLASH] Processed 1275000 read pairs
+  [FLASH] Processed 1300000 read pairs
+  [FLASH] Processed 1325000 read pairs
+  [FLASH] Processed 1350000 read pairs
+  [FLASH] Processed 1375000 read pairs
+  [FLASH] Processed 1400000 read pairs
+  [FLASH] Processed 1425000 read pairs
+  [FLASH] Processed 1450000 read pairs
+  [FLASH] Processed 1475000 read pairs
+  [FLASH] Processed 1500000 read pairs
+  [FLASH] Processed 1525000 read pairs
+  [FLASH] Processed 1550000 read pairs
+  [FLASH] Processed 1575000 read pairs
+  [FLASH] Processed 1600000 read pairs
+  [FLASH] Processed 1625000 read pairs
+  [FLASH] Processed 1650000 read pairs
+  [FLASH] Processed 1675000 read pairs
+  [FLASH] Processed 1700000 read pairs
+  [FLASH] Processed 1725000 read pairs
+  [FLASH] Processed 1750000 read pairs
+  [FLASH] Processed 1775000 read pairs
+  [FLASH] FLASH did not complete successfully; exiting with failure status (1)
+
+Command error:
+  [FLASH] Processed 625000 read pairs
+  [FLASH] Processed 650000 read pairs
+  [FLASH] Processed 675000 read pairs
+  [FLASH] Processed 700000 read pairs
+  [FLASH] Processed 725000 read pairs
+  [FLASH] Processed 750000 read pairs
+  [FLASH] Processed 775000 read pairs
+  [FLASH] Processed 800000 read pairs
+  [FLASH] Processed 825000 read pairs
+  [FLASH] Processed 850000 read pairs
+  [FLASH] Processed 875000 read pairs
+  [FLASH] Processed 900000 read pairs
+  [FLASH] Processed 925000 read pairs
+  [FLASH] Processed 950000 read pairs
+  [FLASH] Processed 975000 read pairs
+  [FLASH] Processed 1000000 read pairs
+  [FLASH] Processed 1025000 read pairs
+  [FLASH] Processed 1050000 read pairs
+  [FLASH] Processed 1075000 read pairs
+  [FLASH] Processed 1100000 read pairs
+  [FLASH] Processed 1125000 read pairs
+  [FLASH] Processed 1150000 read pairs
+  [FLASH] Processed 1175000 read pairs
+  [FLASH] Processed 1200000 read pairs
+  [FLASH] Processed 1225000 read pairs
+  [FLASH] Processed 1250000 read pairs
+  [FLASH] Processed 1275000 read pairs
+  [FLASH] Processed 1300000 read pairs
+  [FLASH] Processed 1325000 read pairs
+  [FLASH] Processed 1350000 read pairs
+  [FLASH] Processed 1375000 read pairs
+  [FLASH] Processed 1400000 read pairs
+  [FLASH] Processed 1425000 read pairs
+  [FLASH] Processed 1450000 read pairs
+  [FLASH] Processed 1475000 read pairs
+  [FLASH] Processed 1500000 read pairs
+  [FLASH] Processed 1525000 read pairs
+  [FLASH] Processed 1550000 read pairs
+  [FLASH] Processed 1575000 read pairs
+  [FLASH] Processed 1600000 read pairs
+  [FLASH] Processed 1625000 read pairs
+  [FLASH] Processed 1650000 read pairs
+  [FLASH] Processed 1675000 read pairs
+  [FLASH] Processed 1700000 read pairs
+  [FLASH] Processed 1725000 read pairs
+  [FLASH] Processed 1750000 read pairs
+  [FLASH] Processed 1775000 read pairs
+  [FLASH] ERROR: [FLASH] FLASH did not complete successfully; exiting with failure status (1)
+  Error writing "./sample1.extendedFrags.fastq": Disk quota exceeded
+  .command.run: line 99: .exitcode: Disk quota exceeded
+
+Work dir:
+  /kyukon/home/gent/516/vsc51676/RDA_microcredential_nextflow_project/work/e3/af5f12c464be2e86181a89b9aaad14
+
+Container:
+  /scratch/gent/516/vsc51676/.apptainer_cache/flash2.sif
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+Jun-16 14:20:05.623 [TaskFinalizer-1] DEBUG nextflow.Session - Session aborted -- Cause: Process `flash2_process (sample1)` terminated with an error exit status (1)
+Jun-16 14:20:05.624 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Jun-16 14:20:05.649 [TaskFinalizer-1] WARN  n.processor.TaskPollingMonitor - Killing running tasks (3)
+Jun-16 14:20:05.663 [TaskFinalizer-1] DEBUG n.executor.local.LocalTaskHandler - Unable to kill flash2_process (sample3) -- command: kill -TERM 1188629; exit: 1 
+ bash: line 1: kill: (1188629) - No such process
+
+Jun-16 14:20:05.668 [TaskFinalizer-1] DEBUG n.executor.local.LocalTaskHandler - Unable to kill flash2_process (sample2) -- command: kill -TERM 1188649; exit: 1 
+ bash: line 1: kill: (1188649) - No such process
+
+Jun-16 14:20:05.704 [TaskFinalizer-1] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=3; succeedDuration=0ms; failedDuration=32s; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=4; peakCpus=4; peakMemory=0; ]
+Jun-16 14:20:05.843 [main] DEBUG nextflow.Session - Session await > all processes finished
+Jun-16 14:20:05.843 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jun-16 14:20:05.844 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=3; succeedDuration=0ms; failedDuration=32s; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=4; peakCpus=4; peakMemory=0; ]
+Jun-16 14:20:05.854 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Jun-16 14:20:05.862 [main] WARN  nextflow.util.HistoryFile - Can't update history file: .nextflow/history
+java.io.FileNotFoundException: .nextflow/history.lock (Disk quota exceeded)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:255)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:210)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:171)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.util.HistoryFile.withFileLock(HistoryFile.groovy:425)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.util.HistoryFile.update(HistoryFile.groovy:79)
+	at nextflow.util.HistoryFile.update(HistoryFile.groovy)
+	at nextflow.Session.destroy(Session.groovy:739)
+	at nextflow.script.ScriptRunner.shutdown(ScriptRunner.groovy:244)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:136)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:442)
+	at nextflow.cli.Launcher.run(Launcher.groovy:526)
+	at nextflow.cli.Launcher.main(Launcher.groovy:686)
+Jun-16 14:20:05.865 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
