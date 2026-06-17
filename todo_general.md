@@ -2,7 +2,14 @@
 
 * ~~make the containers work - save the .sif in the place where the images are fetched from~~
 * solve the params.outdir thing - why does it keep on saying that we have an 'undefined parameter'?? --> when solved, we can uncomment/substitute the 'publishDir line in the proccesses (both of them)
- 
+
+# samtools and smap
+
+* Lotte can you pull the images with docker and convert them to .sif with your magic??
+    ```
+    docker pull quay.io/biocontainers/samtools:1.23.1--ha83d96e_0
+    docker pull ilvo/smap:latest
+    ```
 
 # custom script
 
@@ -15,7 +22,7 @@
 
 # nextflow.config file
 
-* all the preparation we're constantly doing should be possible to be defined in the nextflow.config
+* ~~all the preparation we're constantly doing should be possible to be defined in the nextflow.config~~
     ```
     export APPTAINER_CACHEDIR=${VSC_SCRATCH}/.apptainer_cache
     export APPTAINER_TMPDIR=${VSC_SCRATCH}/.apptainer_tmp
@@ -31,6 +38,6 @@
 # others - data protection
 
 * ~~Delete all reference files with sensitive content~~
-* Create new border file that refers to the positions of ONLY S2 AMPLICONS in the genes_reference
-* blast the genes_reference to the total B104 corteva genome and sum the positions to the border file positions
+* ~~Create new border file that refers to the positions of ONLY S2 AMPLICONS in the genes_reference~~
+* ~~blast the genes_reference to the total B104 corteva genome and sum the positions to the border file positions~~
 * check if the reference index created from the new pair border-genome is identical to the border-targetgenes
