@@ -2,18 +2,13 @@
 
 
 process smap_haplotype_window {
-    container 'docker://ilvo/smap:latest'
+    // container 'docker://ilvo/smap:latest'
+    container 'smap.sif'
 
     publishDir "results/hapcount/", mode: 'copy', overwrite: true
-    tag "${sample_id}"
-
 
     input:
-    path (reference_fasta)
-    path (borders_gff)
-    path (mapped_bam)
-    path (merged_fq)
-    val (sample_id)
+    tuple path (reference_fasta), path (borders_gff), path (mapped_bam), path (merged_fq)
 
     output:
     path "haplotype_counts_c50_f2_m1.tsv", emit: smap_counts

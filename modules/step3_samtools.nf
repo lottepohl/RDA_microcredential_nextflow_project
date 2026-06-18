@@ -2,19 +2,19 @@
 
 
 process sam_to_bam{
-    container "docker://quay.io/biocontainers/samtools:1.17--h00cdaf9_0"
+    // container "docker://quay.io/biocontainers/samtools:1.17--h00cdaf9_0"
+    container 'samtools.sif'
 
     publishDir "results/mapping/", mode: 'copy', overwrite: true
-    tag "$sample"
 
     input:
-    path sample
+    tuple val(sample), path(sammapping)
 
     output:
-    path "${sample}.bam", emit: bam
+    tuple val(sample), path(file("${sample}.bam")), emit: bam
 
     script:
     """
-    samtools sort -o ${sample}.bam ${sample}
+    samtools sort -o ${sample}.bam ${sammapping}
     """
 }

@@ -28,13 +28,12 @@ process bwa_mapping{
     
     // publishDir "${params.outdir}/bwa/", mode: 'copy', overwrite: true
     publishDir "results/mapping/", mode: 'copy', overwrite: true
-    tag "$sample"
 
     input:
     tuple val(sample), path(merged_reads), path(genes), path(index_files)
 
     output:
-    path("${sample}.sam"), emit: sam
+    tuple val(sample), path(file("${sample}.sam")), emit: sam
 
     script:
     """

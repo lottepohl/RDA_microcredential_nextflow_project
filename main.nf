@@ -21,38 +21,7 @@ include { smap_haplotype_window } from "./modules/step4_smap"
 // include { haplotype_analysis } from "./modules/step5_customscript"
 
 
-workflow {
-
-// // stage containers to scratch first
-//     copy_images()
-
-//     // use the output path for subsequent processes
-//     copy_images.out
-//     .map { path -> path.trim() }
-//     .set { images_path_ch }
-
-//     // build sample channel
-//     samples_ch = channel
-//         .fromPath("${params.samples_path}/samplesinfo.csv")
-//         .splitCsv(header: false)
-//         .map { row ->
-//             def sample_id = row[0]
-//             tuple(
-//                 sample_id,
-//                 file("${params.samples_path}/${sample_id}_1.fq.gz"),
-//                 file("${params.samples_path}/${sample_id}_2.fq.gz")
-//             )
-//         }
-
-//     // combine samples with images path
-//     images_path_ch
-//         .combine(samples_ch)
-//         .map { images_path, sample, r1, r2 -> tuple(sample, r1, r2, images_path) }
-//         .set { flash2_input_ch }
-
-    // // execute flash2
-    // flash2_process(flash2_input_ch)
-    
+workflow {   
     // make the paired end reads data into an input channel for the FLASH
     def samples_ch = channel
         .fromPath("${params.samples_path}/samplesinfo.csv")
@@ -70,15 +39,15 @@ workflow {
 
     // make a channel for the files necessary for BWA to make an index
     def reference_ch = channel
-        .of(file("${params.ref_path}/reference_genes.fasta"))
+        .of(file("${params.ref_path}/originalref/reference_genes.fasta"))
     // def reference_ch = channel
-    // .of(file("${params.ref_path}/GCA_902167145-chromosomes.fasta"))
+    // .of(file("${params.ref_path}/newref/GCA_902167145-chromosomes.fasta"))
 
     // make a channel for the border file of polymorphic regions necessary for SMAP
     def borders_ch = channel
-        .of(file("${params.ref_path}/borderFile.gff"))
+        .of(file("${params.ref_path}/originalref/borderFile.gff"))
     // def reference_ch = channel
-    // .of(file("${params.ref_path}/border10Targets.gff"))
+    // .of(file("${params.ref_path}/newref/border10Targets.gff"))
 
 
     // create index from reference genes
@@ -90,8 +59,21 @@ workflow {
     sam_to_bam(bwa_mapping.out.sam)
 
 
-    // distinguish haplotypes at each polymorphic locus with SMAP
-    smap_haplotype_window(reference_ch, borders_ch, sam_to_bam.out.bam, flash2_process.out.merged)
+    // // prepare pairs of flash2 and samtobam outputs per sample, to input in SMAP
+    // def pairs_reads_and_mappings_ch = sam_to_bam.out.bam
+    //     .join(flash2_process.out.merged)
+
+    // // we need the reference and the borders to be combined with each sample's reads&mapping pair
+    // def smap_input_ch = pairs_reads_and_mappings_ch
+    //     .combine(reference_ch)
+    //     .combine(borders_ch)
+    //     .map {reference, borders, bam, merged ->
+    //         tuple(reference, borders, bam, merged)
+    //     }
+ 
+
+    // // distinguish haplotypes at each polymorphic locus with SMAP
+    // smap_haplotype_window(smap_input_ch)
 
 
  }
