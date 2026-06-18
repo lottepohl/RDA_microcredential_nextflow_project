@@ -13,6 +13,7 @@ params {
 }
 
 // include modules
+// include { copy_images } from "./modules/step0_copy_images"
 include { flash2_process } from "./modules/step1_flash2"
 include { bwa_index ; bwa_mapping } from "./modules/step2_bwa"
 include { sam_to_bam } from "./modules/step3_samtools"
@@ -21,6 +22,37 @@ include { smap_haplotype_window } from "./modules/step4_smap"
 
 
 workflow {
+
+// // stage containers to scratch first
+//     copy_images()
+
+//     // use the output path for subsequent processes
+//     copy_images.out
+//     .map { path -> path.trim() }
+//     .set { images_path_ch }
+
+//     // build sample channel
+//     samples_ch = channel
+//         .fromPath("${params.samples_path}/samplesinfo.csv")
+//         .splitCsv(header: false)
+//         .map { row ->
+//             def sample_id = row[0]
+//             tuple(
+//                 sample_id,
+//                 file("${params.samples_path}/${sample_id}_1.fq.gz"),
+//                 file("${params.samples_path}/${sample_id}_2.fq.gz")
+//             )
+//         }
+
+//     // combine samples with images path
+//     images_path_ch
+//         .combine(samples_ch)
+//         .map { images_path, sample, r1, r2 -> tuple(sample, r1, r2, images_path) }
+//         .set { flash2_input_ch }
+
+    // // execute flash2
+    // flash2_process(flash2_input_ch)
+    
     // make the paired end reads data into an input channel for the FLASH
     def samples_ch = channel
         .fromPath("${params.samples_path}/samplesinfo.csv")
@@ -32,7 +64,7 @@ workflow {
                 file("${params.samples_path}/${sample_id}_2.fq.gz"))
         }
         .view()
-
+    
     // execute flash2
     flash2_process(samples_ch)
 
