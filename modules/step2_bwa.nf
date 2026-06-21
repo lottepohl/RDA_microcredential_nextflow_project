@@ -33,7 +33,7 @@ process bwa_mapping{
     tuple val(sample), path(merged_reads), path(genes), path(index_files)
 
     output:
-    tuple val(sample), path(file("${sample}.sam")), emit: sam
+    tuple val(sample), path("${sample}.sam"), emit: sam
 
     script:
     """

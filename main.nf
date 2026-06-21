@@ -13,12 +13,11 @@ params {
 }
 
 // include modules
-// include { copy_images } from "./modules/step0_copy_images"
 include { flash2_process } from "./modules/step1_flash2"
 include { bwa_index ; bwa_mapping } from "./modules/step2_bwa"
 include { sam_to_bam } from "./modules/step3_samtools"
 include { smap_haplotype_window } from "./modules/step4_smap"
-// include { haplotype_analysis } from "./modules/step5_customscript"
+include { haplotype_analysis } from "./modules/step5_customscript"
 
 
 workflow {   
@@ -59,21 +58,39 @@ workflow {
     sam_to_bam(bwa_mapping.out.sam)
 
 
-    // // prepare pairs of flash2 and samtobam outputs per sample, to input in SMAP
-    // def pairs_reads_and_mappings_ch = sam_to_bam.out.bam
-    //     .join(flash2_process.out.merged)
+    // prepare pairs of flash2 and samtobam outputs per sample, to input in SMAP
+    def smap_joined = flash2_process.out.merged
+        .join(sam_to_bam.out.bam)    
+    def smap_input = smap_joined
+        .map { sample, merged_fq, bam ->
+            tuple(
+                file("${params.ref_path}/originalref/reference_genes.fasta"),
+                file("${params.ref_path}/originalref/borderFile.gff"),
+                bam,
+                merged_fq
+            )
+        }
 
-    // // we need the reference and the borders to be combined with each sample's reads&mapping pair
-    // def smap_input_ch = pairs_reads_and_mappings_ch
-    //     .combine(reference_ch)
-    //     .combine(borders_ch)
-    //     .map {reference, borders, bam, merged ->
-    //         tuple(reference, borders, bam, merged)
-    //     }
- 
 
-    // // distinguish haplotypes at each polymorphic locus with SMAP
-    // smap_haplotype_window(smap_input_ch)
+    // distinguish haplotypes at each polymorphic locus with SMAP
+    smap_haplotype_window(smap_input)
 
+
+    // define channel with all inputs necessary for the custom python script
+    def samplesinfo_ch = channel.of(file("${params.samples_path}/samplesinfo.csv"))
+    def python_input = smap_haplotype_window.out.smap_freqs
+        .combine(samplesinfo_ch)
+        .map { hapfile, samplesinfo ->
+            tuple(
+                hapfile,
+                file("${params.ref_path}/originalref/reference_genes.fasta"),
+                file("${params.ref_path}/originalref/borderFile.gff"),
+                samplesinfo
+            )
+        }
+
+
+    // run the custom script
+    haplotype_analysis(python_input)
 
  }

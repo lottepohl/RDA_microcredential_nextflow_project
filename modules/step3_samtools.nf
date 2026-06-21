@@ -8,13 +8,13 @@ process sam_to_bam{
     publishDir "results/mapping/", mode: 'copy', overwrite: true
 
     input:
-    tuple val(sample), path(sammapping)
+    tuple val(sample), path(bwamapping)
 
     output:
-    tuple val(sample), path(file("${sample}.bam")), emit: bam
+    tuple val(sample), path("${sample}.bam"), emit: bam
 
     script:
     """
-    samtools sort -o ${sample}.bam ${sammapping}
+    samtools sort -o ${sample}.bam ${bwamapping}
     """
 }

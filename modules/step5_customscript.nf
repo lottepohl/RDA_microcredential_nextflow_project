@@ -1,13 +1,23 @@
 #!/usr/bin/env nextflow
 
-// will be using the custom .py script container!
-process haplotype_analysis{
- // ...
-input:
+process haplotype_analysis {
 
-output:
+    input:
+    tuple path(haplo_file),
+          path(reference),
+          path(borders),
+          path(samplesinfo)
 
-script:
-"""
-"""
+    output:
+    path "plots/*"
+
+    script:
+    """
+    python3 HaplotypeAnalysis.py \
+        --haplotypes $haplo_file \
+        --reference $reference \
+        --borders $borders \
+        --samples $samplesinfo \
+        > *.png
+    """
 }
