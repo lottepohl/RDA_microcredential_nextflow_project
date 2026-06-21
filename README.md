@@ -3,34 +3,52 @@ repository to store code for the nextflow project in the context of the VIB repr
 
 *Authors*: Matilde Sanches (VIB), Lotte Pohl (UGent)
 
+
+## Concept
+
+Multiplex genome editing is a technique in which plants are transformed with CRISPR-Cas9 technology targeting multiple editing sites simultaneously.
+Because Cas9 remains active during plant growth, it is important to keep track of the mutations that actually happened in the targeted loci.
+
+
 ## Description of the pipeline
 
-The pipeline of this microcredential nextflow project uses DNA-reads of maize fastq-files as raw input data.
-The goal is to identify the number of Single Nucleotide Polymorphisms (SNPs) in the sequencing data.
-The main result after running the pipeline is a plot visualising the share SNP share inside the `results/` folder.
+The pipeline of this microcredential nextflow project uses DNA-reads of maize (fastq-files) as raw input data.
+The goal is to identify the frequency of mutations at 10 loci (10 of the CRISPR targets), in multiple samples at the same tima
+The main result after running the pipeline is a plot per sample that shows the edit rate and edit type (SNPs and INDELs) at each locus. 
 
 The pipeline encompasses these main steps:
     
-    1. The tool [bbmerch](https://hub.docker.com/layers/shinejh0528/bbmerge/1.0.0/images/sha256-8fd086c6f5cf0425584c9cd93a632e94ce055eb3ad0334c7873c135311b02ef1) [Bushner et al., 2017](https://doi.org/10.1371/journal.pone.0185056) is implemented to match pairs of DNA strands
+    1. The tool [flash](quay.io/biocontainers/flash2:2.2.00--0)  is implemented to match paired ends of DNA reads (1 pair per sample)
 
     3. After the matching is completed, the [Burrows-Wheeler Aligner (bwa)](https://hub.docker.com/layers/biocontainers/bwa/v0.7.17_cv1/images/sha256-9479b73e108ded3c12cb88bb4e918a5bf720d7861d6d8cdbb46d78a972b6ff1b) is used to create indices and to map to a reference genome.
 
-    4. After aligning, a custom .py script is run to get from DNA reads to counts of base pairs, and from that to the number of mutations (the SNPs). The script makes an overview plot of the number of SNPs identified from the input data.
+    3. Then, samtools is used to convert the output of bwa (.sam) format in mapped files in .bam format - essential for use in the following step.
 
-    The custom .py script is inside a container, which can be found here: (* insert link *).
+    4. After aligning, SMAP-haplotype-window is used to differentiate, using the mapping files, the original reads, as well as the reference (.fasta) and a custom file of coordinates (.gff), which reads correspond to the reference (not mutated) DNA sequence, or if it's different (mutated). It outputs a haplotype_frequency.tsv file in which it provides for each plant and locus the amount of Mutated reads (relative to the amount of Reference reads)
+    
+    5. Finally, a custom .py script is run to get some informative plots (one per sample) on the amount of mutations present at each locus.
 
-    The dockerhub images are put on the shared folder on the UGent hpc: /data/gent/courses/2025/vibrepdata_EXT003/shared/testdata_lotte_and_matilde
+   
+## Note about SMAP-haplotype-window
 
-## Instructions how to run the pipeline 
+This tool was created at ILVO and it is used by some labs in PSB-VIB. However, because the actual version of SMAP that supports the haplotype-window plugin is an older version that is no longer maintained by ILVO, in the local Cluster of PSB we run it inside virtual environments with a lot of older versions of dependencies installed. 
+For this project Matilde spent quite some time creating an image of one of those environments (by writing a Dockerfile with all the installations), and uploaded it to docker hub (matsanches/smap_haplotype_window).
+Unfortunately, while the pipeline worked locally using that container, on the HPC it constantly fails (and therefore impairs the progression of the pipeline) because of the Numpy version that is installed on the HPC (that doesn't seem to let an image built with an older version of Numpy run).
 
+## Note on the reference genome file
+
+The input fasta file in the `genome_reference` directory consists of a list of the reference sequences of the genes that were targeted for mutation. Because of data confidentiality, we opted to keep them in our git repo instead of putting them in the shared folder on the HPC.
+
+    
 ### Test dataset
 
+The testdata were put on the shared folder on the UGent hpc: /data/gent/courses/2025/vibrepdata_EXT003/shared/testdata_lotte_and_matilde
 - maize .fastq files
 
-biocontainers tools used. Biocontainers info: https://biocontainers-edu.readthedocs.io/en/latest/examples.html, https://biocontainers.pro/registry 
+Also, because of the crash of the pipeline on SMAP step, we have included a test file of the supposed output of this step inside results/smap.
 
-### Setup for the HPC:
 
+### Setup for the HPC (before running the pipeline):
 Copy the following lines of code in your terminal of the HPC
 ```
 module load Nextflow/26.04.3
@@ -40,19 +58,7 @@ export APPTAINER_CACHEDIR=${VSC_SCRATCH}/.apptainer_cache
 export APPTAINER_TMPDIR=${VSC_SCRATCH}/.apptainer_tmp
 
 ```
-When you set up your HPC instance to use nextflow for the first time, copy these 2 setup lines of code in your terminal too:
-```
-mkdir ${VSC_SCRATCH}/.apptainer_cache
-mkdir ${VSC_SCRATCH}/.apptainer_tmp
-```
 
-## Input files
-
-The input files are in the `genome_reference` directory. The 
-
-## Output files
-
-In the  `results` directory, a plot of the share of SNPs found in the test sample will be saved.
 
 ## Contribution
 

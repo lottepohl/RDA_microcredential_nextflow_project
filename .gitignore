@@ -1,6 +1,11 @@
 .nextflow.*
 .nextflow/*
-results/*
+results/flash2/*
+results/index/*
+results/mapping/*
+python_analysis/*
+genome_reference/newref/*
+archive/*
 work/*
 images/*
 genome_reference/newref/slurm*

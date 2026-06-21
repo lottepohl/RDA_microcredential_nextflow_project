@@ -5,8 +5,7 @@ params {
     samples_path = "/data/gent/courses/2025/vibrepdata_EXT003/shared/testdata_lotte_and_matilde"
 
     // ref_path = "${launchDir}/genome_reference"
-    ref_path = "./genome_reference/originalref"
-    // ref_path = "./genome_reference/newref"
+    ref_path = "./genome_reference"
 
     // outdir = "${launchDir}/results"
 
@@ -38,13 +37,13 @@ workflow {
 
     // make a channel for the files necessary for BWA to make an index
     def reference_ch = channel
-        .of(file("${params.ref_path}/originalref/reference_genes.fasta"))
+        .of(file("${params.ref_path}/reference_genes.fasta"))
     // def reference_ch = channel
     // .of(file("${params.ref_path}/newref/GCA_902167145-chromosomes.fasta"))
 
     // make a channel for the border file of polymorphic regions necessary for SMAP
     def borders_ch = channel
-        .of(file("${params.ref_path}/originalref/borderFile.gff"))
+        .of(file("${params.ref_path}/borderFile.gff"))
     // def reference_ch = channel
     // .of(file("${params.ref_path}/newref/border10Targets.gff"))
 
@@ -64,8 +63,8 @@ workflow {
     def smap_input = smap_joined
         .map { sample, merged_fq, bam ->
             tuple(
-                file("${params.ref_path}/originalref/reference_genes.fasta"),
-                file("${params.ref_path}/originalref/borderFile.gff"),
+                file("${params.ref_path}/reference_genes.fasta"),
+                file("${params.ref_path}/borderFile.gff"),
                 bam,
                 merged_fq
             )
@@ -83,8 +82,8 @@ workflow {
         .map { hapfile, samplesinfo ->
             tuple(
                 hapfile,
-                file("${params.ref_path}/originalref/reference_genes.fasta"),
-                file("${params.ref_path}/originalref/borderFile.gff"),
+                file("${params.ref_path}/reference_genes.fasta"),
+                file("${params.ref_path}/borderFile.gff"),
                 samplesinfo
             )
         }
