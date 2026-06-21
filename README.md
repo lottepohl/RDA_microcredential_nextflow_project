@@ -49,3 +49,29 @@ mkdir ${VSC_SCRATCH}/.apptainer_tmp
 ## Input files
 
 ## Output files
+
+## Contribution
+
+* M, with assistance of L drafted the project idea. M had some test data and a custom script from another project which served as the basis for the developed workflow.
+
+* L drafted the first version of the `README.md`, which was then completed by M with additional, more bioinformatic-specific information.
+
+* L setup the folder structure and created a github repository.
+
+* L drafted a first version of the three original modules (`step1_flah2.nf`, `step2_bwa.nf`, `step5_customscript.nf`). 
+
+* M provided and prepared the input data (in folder `./genome_reference/`)
+
+* M finalised the three initial modules, and during this work realised the need for two additional modules (`step3_samtools.nf`, `step4_smap.nf`) which she drafted and completed.
+
+* L drafted the `main.nf` workflow, which M completed during and after the completion of the modules.
+
+* M and L worked in collaboration on providing the apptainer images on the VSC environment. Because of the security issues, the .sif files could not be pulled on the VSC itself but needed to be provided on an agreed shared location. M identified the images that needed to be pulled, L pulled them on her local laptop and copied the .sif files to the VSC.
+
+* L was in E-Mail contact with the VIB trainers.
+
+* M amended the custom python script she had worked on in another project to serve the purpose of this nextflow project. She containerised it and provided the resulting image on dockerhub. *[...]*
+
+* L made a profile in `nextflow.config` *(not there anymore at the moment, I might need to push from the VSC...)*.
+
+* L drafted the contributions section, M completed it.
