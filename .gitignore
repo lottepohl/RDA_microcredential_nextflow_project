@@ -2,3 +2,5 @@
 .nextflow/*
 results/*
 work/*
+genome_reference/newref/slurm*
+genome_reference/newref/*.fasta
