@@ -9,8 +9,8 @@ The pipeline of this microcredential nextflow project uses DNA-reads of maize fa
 The goal is to identify the number of Single Nucleotide Polymorphisms (SNPs) in the sequencing data.
 The main result after running the pipeline is a plot visualising the share SNP share inside the `results/` folder.
 
-The pipeline encompasses four main steps:
-
+The pipeline encompasses these main steps:
+    
     1. The tool [bbmerch](https://hub.docker.com/layers/shinejh0528/bbmerge/1.0.0/images/sha256-8fd086c6f5cf0425584c9cd93a632e94ce055eb3ad0334c7873c135311b02ef1) [Bushner et al., 2017](https://doi.org/10.1371/journal.pone.0185056) is implemented to match pairs of DNA strands
 
     3. After the matching is completed, the [Burrows-Wheeler Aligner (bwa)](https://hub.docker.com/layers/biocontainers/bwa/v0.7.17_cv1/images/sha256-9479b73e108ded3c12cb88bb4e918a5bf720d7861d6d8cdbb46d78a972b6ff1b) is used to create indices and to map to a reference genome.
@@ -48,7 +48,11 @@ mkdir ${VSC_SCRATCH}/.apptainer_tmp
 
 ## Input files
 
+The input files are in the `genome_reference` directory. The 
+
 ## Output files
+
+In the  `results` directory, a plot of the share of SNPs found in the test sample will be saved.
 
 ## Contribution
 
