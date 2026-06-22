@@ -74,14 +74,16 @@ export APPTAINER_TMPDIR=${VSC_SCRATCH}/.apptainer_tmp
 
 * M finalised the three initial modules, and during this work realised the need for two additional modules (`step3_samtools.nf`, `step4_smap.nf`) which she drafted and completed.
 
+* M created the image 'smap_hapwindow' from scratch, using docker and writing a recipe, which then she uploaded to Dockerhub (matsanches/smap_hapwindow). L pulled it with apptainer, thus creating the .sif image that was put in the shared folder.
+
 * L drafted the `main.nf` workflow, which M completed during and after the completion of the modules.
 
 * M and L worked in collaboration on providing the apptainer images on the VSC environment. Because of the security issues, the .sif files could not be pulled on the VSC itself but needed to be provided on an agreed shared location. M identified the images that needed to be pulled, L pulled them on her local laptop and copied the .sif files to the VSC.
 
 * L was in E-Mail contact with the VIB trainers.
 
-* M amended the custom python script she had worked on in another project to serve the purpose of this nextflow project. She containerised it and provided the resulting image on dockerhub. *[...]*
+* M created the module to run the custom python script.
 
-* L made a profile in `nextflow.config` *(not there anymore at the moment, I might need to push from the VSC...)*.
+* L made a profile in `nextflow.config`.
 
 * L drafted the contributions section, M completed it.
