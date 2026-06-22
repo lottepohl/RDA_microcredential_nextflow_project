@@ -45,7 +45,7 @@ The input fasta file in the `genome_reference` directory consists of a list of t
 The testdata were put on the shared folder on the UGent hpc: /data/gent/courses/2025/vibrepdata_EXT003/shared/testdata_lotte_and_matilde
 - maize .fastq files
 
-Also, because of the crash of the pipeline on SMAP step, we have included a test file of the supposed output of this step inside results/smap.
+Also, because of the crash of the pipeline on SMAP step, we have included a test file of the supposed output of this step inside results/smap, and the corresponding main_bypass.nf script.
 
 
 ### Setup for the HPC (before running the pipeline):
