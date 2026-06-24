@@ -47,6 +47,9 @@ The testdata were put on the shared folder on the UGent hpc: /data/gent/courses/
 
 Also, because of the crash of the pipeline on SMAP step, we have included a test file of the supposed output of this step inside results/smap, and the corresponding main_bypass.nf script.
 
+### Location of .sif images
+
+On the UGent HPC environment, all required .sif images are stored in /data/gent/courses/2025/vibrepdata_EXT003/shared/apptainer_cache
 
 ### Setup for the HPC (before running the pipeline):
 Copy the following lines of code in your terminal of the HPC
